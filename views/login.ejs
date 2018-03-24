@@ -119,6 +119,14 @@ align-items: center;
 justify-content: center;
 }
 
+button {
+  background-color: #1CB94E;
+  color: #FFF;
+}
+button.foo {
+  background-color: #006600;
+  color: #FFF;
+}
 
 </style>
 
@@ -138,9 +146,11 @@ $(function() {
 		$('#login-form-link').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
-
 	});
 
+  $("button").click(function() {
+    $(this).toggleClass('foo');
+  });
 });
 
 </script>
@@ -153,11 +163,11 @@ $(function() {
         <br>
         <div class = "row" id="buttons">
           <div class = "col-xs-6" id="cli">
-        <button type="submit" class="btn btn-success btn-lg" id="client" style=" height: 50px;
+        <button type="submit" class="btn btn-lg" id="client" style=" height: 50px;
   width: 120px;">Client</button>
           </div>
       <div class = "col-xs-6" id="doc">
-        <button type="submit" class="btn btn-success btn-lg" id="doctor" style="height: 50px;
+        <button type="submit" class="btn btn-lg" id="doctor" style="height: 50px;
   width: 120px;">Doctor</button>
       </div>
       </div>
