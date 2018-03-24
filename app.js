@@ -1,8 +1,21 @@
-const express = require('express')
-var app = express()
+const express = require('express');
+var app = express();
+const Sequelize = require('sequelize');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
+// connect to the database
+var db ='mysql://healthconnect:healthconnect@healthconnect.colb5rylrj04.us-east-2.rds.amazonaws.com:3306/healthconnect'
+var sequelize = new Sequelize(db);
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.get('/', function(req, res) {res.render('index')})
 
