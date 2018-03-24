@@ -112,6 +112,14 @@ body {
 	background-color: #1CA347;
 	border-color: #1CA347;
 }
+
+#cli, #doc{
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
 </style>
 
 <script>
@@ -130,6 +138,7 @@ $(function() {
 		$('#login-form-link').removeClass('active');
 		$(this).addClass('active');
 		e.preventDefault();
+
 	});
 
 });
@@ -142,8 +151,20 @@ $(function() {
 			<div class="col-md-6 col-md-offset-3">
         <h1 class="title"> Health Connect </h1>
         <br>
+        <div class = "row" id="buttons">
+          <div class = "col-xs-6" id="cli">
+        <button type="submit" class="btn btn-success btn-lg" id="client" style=" height: 50px;
+  width: 120px;">Client</button>
+          </div>
+      <div class = "col-xs-6" id="doc">
+        <button type="submit" class="btn btn-success btn-lg" id="doctor" style="height: 50px;
+  width: 120px;">Doctor</button>
+      </div>
+      </div>
+        <br><br>
 				<div class="panel panel-login">
 					<div class="panel-heading">
+
 						<div class="row">
 							<div class="col-xs-6">
 								<a href="#" class="active" id="login-form-link">Login</a>
