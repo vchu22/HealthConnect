@@ -18,6 +18,13 @@ app.post('/create/client', function(req, res) {
   tables.insertClient(username, password, email);
   res.send(username+" was created");
 })
+app.post('/create/doctor', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  var email = req.body.email;
+  tables.insertDoctor(username, password, email);
+  res.send(username+" was created");
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 

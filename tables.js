@@ -72,5 +72,14 @@ module.exports = {
     }).then(function(){
       console.log("Client inserted");
     })
+  },
+  insertDoctor: function(usr, psw, email){
+    Doctors.create({
+      username: usr,
+      password: psw,
+      docEmail: email
+    }).then(function(){
+      console.log("Doctor inserted");
+    })
   }
 };
