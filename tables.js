@@ -19,7 +19,7 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-// Clients table
+// table definitions section
 var Clients = sequelize.define('Clients', {
   clId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
   clFname: Sequelize.STRING(40),
@@ -63,6 +63,7 @@ Doctors
     console.log("Doctors table loaded");
   });
 
+// insert and lookup section
 module.exports = {
   insertClient: function(usr, psw, email){
     Clients.create({
@@ -70,7 +71,7 @@ module.exports = {
       password: psw,
       clEmail: email
     }).then(function(){
-      console.log("Client inserted");
+      console.log("Client"+usr+" inserted");
     })
   },
   insertDoctor: function(usr, psw, email){
@@ -79,7 +80,27 @@ module.exports = {
       password: psw,
       docEmail: email
     }).then(function(){
-      console.log("Doctor inserted");
+      console.log("Doctor "+usr+" inserted");
     })
+  },
+  loginClient: function(usr, psw){
+    return Clients.findOne({
+      where: {
+        username: usr,
+        password: psw
+      }
+    }).then((client) => {
+      return client;
+    });
+  },
+  loginDoctor: function(usr, psw){
+    return Doctors.findOne({
+      where: {
+        username: usr,
+        password: psw
+      }
+    }).then((doctor) => {
+        return;
+    });
   }
 };

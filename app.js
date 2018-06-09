@@ -25,6 +25,40 @@ app.post('/create/doctor', function(req, res) {
   tables.insertDoctor(username, password, email);
   res.send(username+" was created");
 })
+app.post('/login/client', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  var login = new Promise(function(resolve) {
+    resolve(tables.loginClient(username, password));
+  }).catch(function(err){
+    console.log("There's an error while performing client login");
+  })
+
+  login.then((result) => {
+    if (result == null) // if no result returned, then it means the login failed
+      res.send("Login failed");
+    else{
+      res.send("Login successful");
+    }
+  })
+})
+app.post('/login/doctor', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  var login = new Promise(function(resolve) {
+    resolve(tables.loginDoctor(username, password));
+  }).catch(function(err){
+    console.log("There's an error while performing doctor login");
+  })
+
+  login.then((result) => {
+    if (result == null) // if no result returned, then it means the login failed
+      res.send("Login failed");
+    else{
+      res.send("Login successful");
+    }
+  })
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
