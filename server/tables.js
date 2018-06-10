@@ -1,10 +1,12 @@
 // this file defines the ORM structures of all the tables from the database
 // and the functions for making queries
 const Sequelize = require('sequelize');
+require('dotenv').config();
+
 // connect to the database
-var sequelize = new Sequelize('healthconnect', 'healthconnect', 'healthconnect', {
-    host: "healthconnect.colb5rylrj04.us-east-2.rds.amazonaws.com",
-    port: 3306,
+var sequelize = new Sequelize(process.env.DB_SCHEMA, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mysql',
     define: {
         timestamps: false
