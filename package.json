@@ -4,7 +4,7 @@
   "description": "### Team Members  * Vanessa Chu  * Yu Li  * Akanksha Nilosey  * Suyash Soumya",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js"
+    "start": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
