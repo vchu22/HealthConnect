@@ -1,8 +1,8 @@
 <html>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <!------ Include the above in your HEAD tag ---------->
 <style>
@@ -127,13 +127,23 @@ button.foo {
   background-color: #006600;
   color: #FFF;
 }
-
+.hidden{
+  display: none;
+}
 </style>
 
 <script>
-$(function() {
+var accountType;
+function loginCheck(){
+  console.log(accountType);
+  if (accountType == null){
+    $("#account-type-alert").removeClass("hidden");
+    return false;
+  }
+}
 
-    $('#login-form-link').click(function(e) {
+$(function() {
+  $('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
  		$("#register-form").fadeOut(100);
 		$('#register-form-link').removeClass('active');
@@ -149,7 +159,16 @@ $(function() {
 	});
 
   $("button").click(function() {
-    $(this).toggleClass('foo');
+    if ($(this).attr('id') == "client"){
+      $(this).addClass('foo');
+      $("#doctor").removeClass('foo');
+      accountType = "client";
+    } else if ($(this).attr('id') == "doctor"){
+      $(this).addClass('foo');
+      $("#client").removeClass('foo');
+      accountType = "doctor";
+    }
+    $("#login-form").attr("action","/login/"+accountType);
   });
 });
 
@@ -163,18 +182,15 @@ $(function() {
         <br>
         <div class = "row" id="buttons">
           <div class = "col-xs-6" id="cli">
-        <button type="submit" class="btn btn-lg" id="client" style=" height: 50px;
-  width: 120px;">Client</button>
+        <button class="btn btn-lg" id="client" style=" height: 50px; width: 120px;">Client</button>
           </div>
       <div class = "col-xs-6" id="doc">
-        <button type="submit" class="btn btn-lg" id="doctor" style="height: 50px;
-  width: 120px;">Doctor</button>
+        <button class="btn btn-lg" id="doctor" style="height: 50px; width: 120px;">Doctor</button>
       </div>
       </div>
         <br><br>
 				<div class="panel panel-login">
 					<div class="panel-heading">
-
 						<div class="row">
 							<div class="col-xs-6">
 								<a href="#" class="active" id="login-form-link">Login</a>
@@ -188,12 +204,18 @@ $(function() {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" method="post" role="form" style="display: block;">
+								<form id="login-form" method="post" role="form" onsubmit="return loginCheck()" style="display: block;">
+                  <div id="account-type-alert" class="alert alert-info hidden">
+                    Please select an account type using the buttons above.
+                  </div>
+                  <div id="login-alert" class="alert alert-danger hidden">
+                    Wrong username/password combination.
+                  </div>
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
