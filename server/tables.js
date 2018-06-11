@@ -73,7 +73,7 @@ module.exports = {
       password: psw,
       clEmail: email
     }).then(function(){
-      console.log("Client"+usr+" inserted");
+      console.log("Client "+usr+" inserted");
     })
   },
   insertDoctor: function(usr, psw, email){
@@ -102,7 +102,7 @@ module.exports = {
         password: psw
       }
     }).then((doctor) => {
-        return;
+      return doctor;
     });
   }
 };

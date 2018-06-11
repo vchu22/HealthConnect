@@ -11,53 +11,41 @@ app.use(bodyParser.json())
 app.get('/', function(req, res) {res.render('index')})
 
 app.get('/user', function(req, res) {res.render('login')})
-app.post('/create/client', function(req, res) {
+app.post('/create/:accountType', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
-  tables.insertClient(username, password, email);
-  res.send(username+" was created");
+  if (req.params.accountType == "client"){
+    tables.insertClient(username, password, email);
+    res.send("Client "+username+" was created");
+  }
+  else if (req.params.accountType == "doctor"){
+    tables.insertDoctor(username, password, email);
+    res.send("Doctor "+username+" was created");
+  }
+  else
+    res.send();
 })
-app.post('/create/doctor', function(req, res) {
+app.post('/login/:accountType', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
-  var email = req.body.email;
-  tables.insertDoctor(username, password, email);
-  res.send(username+" was created");
-})
-app.post('/login/client', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var login = new Promise(function(resolve) {
-    resolve(tables.loginClient(username, password));
+  new Promise(function(resolve) {
+    if (req.params.accountType == "client")
+      resolve(tables.loginClient(username, password));
+    else if (req.params.accountType == "doctor")
+      resolve(tables.loginDoctor(username, password));
+    else
+      reject();
   }).catch(function(err){
-    console.log("There's an error while performing client login");
-  })
-
-  login.then((result) => {
+    console.log("There's an error while performing login");
+    res.send();
+  }).then((result) => {
     if (result == null) // if no result returned, then it means the login failed
       res.send("Login failed");
     else{
       res.send("Login successful");
     }
-  })
-})
-app.post('/login/doctor', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var login = new Promise(function(resolve) {
-    resolve(tables.loginDoctor(username, password));
-  }).catch(function(err){
-    console.log("There's an error while performing doctor login");
-  })
-
-  login.then((result) => {
-    if (result == null) // if no result returned, then it means the login failed
-      res.send("Login failed");
-    else{
-      res.send("Login successful");
-    }
-  })
+  });
 })
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
