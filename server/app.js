@@ -47,6 +47,8 @@ app.post('/login/:accountType', function(req, res) {
     }
   });
 })
+app.get('/client/dashboard', function(req, res) {res.render('client-dashboard', {fname:'John',lname:'Doe'})});
+app.get('/doctor/dashboard', function(req, res) {res.render('doctor-dashboard', {fname:'Sarah', lname:'Smith'})});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
