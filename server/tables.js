@@ -22,11 +22,12 @@ sequelize
   });
 
 // table definitions section
-var Clients = sequelize.define('Clients', {
+var Client = sequelize.define('Client', {
   clId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
   clFname: Sequelize.STRING(40),
   clLname: Sequelize.STRING(40),
   clSex: Sequelize.CHAR(1),
+  clEmail: Sequelize.STRING(355),
   clStreet: Sequelize.STRING(100),
   clCity: Sequelize.STRING(40),
   clState: Sequelize.CHAR(2),
@@ -35,16 +36,15 @@ var Clients = sequelize.define('Clients', {
   clDOB: Sequelize.DATEONLY,
   insId: Sequelize.CHAR(1),
   username: Sequelize.STRING(50),
-  password: Sequelize.STRING(120),
-  clEmail: Sequelize.STRING(100)
+  password: Sequelize.STRING(120)
 });
-Clients
+Client
   .sync()
   .then(function(){
-    console.log("Clients table loaded");
+    console.log("Client table loaded");
   });
-// Doctors tables
-var Doctors = sequelize.define('Doctors', {
+// Doctor tables
+var Doctor = sequelize.define('Doctor', {
   docId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
   docFname: Sequelize.STRING(40),
   docLname: Sequelize.STRING(40),
@@ -57,18 +57,18 @@ var Doctors = sequelize.define('Doctors', {
   docRating: Sequelize.DECIMAL(2,1),
   username: Sequelize.STRING(50),
   password: Sequelize.STRING(120),
-  docEmail: Sequelize.STRING(100)
+  docEmail: Sequelize.STRING(355)
 })
-Doctors
+Doctor
   .sync()
   .then(function(){
-    console.log("Doctors table loaded");
+    console.log("Doctor table loaded");
   });
 
 // insert and lookup section
 module.exports = {
   insertClient: function(usr, psw, email){
-    Clients.create({
+    Client.create({
       username: usr,
       password: psw,
       clEmail: email
@@ -77,7 +77,7 @@ module.exports = {
     })
   },
   insertDoctor: function(usr, psw, email){
-    Doctors.create({
+    Doctor.create({
       username: usr,
       password: psw,
       docEmail: email
@@ -86,7 +86,7 @@ module.exports = {
     })
   },
   loginClient: function(usr, psw){
-    return Clients.findOne({
+    return Client.findOne({
       where: {
         username: usr,
         password: psw
@@ -96,7 +96,7 @@ module.exports = {
     });
   },
   loginDoctor: function(usr, psw){
-    return Doctors.findOne({
+    return Doctor.findOne({
       where: {
         username: usr,
         password: psw
