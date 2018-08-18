@@ -27,7 +27,7 @@ var Client = sequelize.define('Client', {
   clFname: Sequelize.STRING(40),
   clLname: Sequelize.STRING(40),
   clSex: Sequelize.CHAR(1),
-  clEmail: Sequelize.STRING(355),
+  clEmail: Sequelize.STRING(255),
   clStreet: Sequelize.STRING(100),
   clCity: Sequelize.STRING(40),
   clState: Sequelize.CHAR(2),
@@ -57,7 +57,7 @@ var Doctor = sequelize.define('Doctor', {
   docRating: Sequelize.DECIMAL(2,1),
   username: Sequelize.STRING(50),
   password: Sequelize.STRING(120),
-  docEmail: Sequelize.STRING(355)
+  docEmail: Sequelize.STRING(255)
 })
 Doctor
   .sync()
