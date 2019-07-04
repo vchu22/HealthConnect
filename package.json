@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,8 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
     "promise": "^8.0.1",
-    "sequelize": "^5.8.11"
-  }
+    "sequelize": "^5.8.11",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
