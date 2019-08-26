@@ -4,7 +4,7 @@
   "description": "### Team Members  * Vanessa Chu  * Yu Li  * Akanksha Nilosey  * Suyash Soumya",
   "main": "app.js",
   "scripts": {
-    "start": "node server/app.js",
+    "start": "nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
@@ -27,6 +27,8 @@
     "express-validator": "^6.0.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
+    "nodemon": "^1.19.1",
+    "pg": "^7.12.1",
     "promise": "^8.0.1",
     "sequelize": "^5.8.11",
     "snyk": "^1.192.5"
