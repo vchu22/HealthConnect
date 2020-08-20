@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/vchu22/HealthConnect#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
     "dotenv": "^6.0.0",
     "ejs": "^2.5.7",
